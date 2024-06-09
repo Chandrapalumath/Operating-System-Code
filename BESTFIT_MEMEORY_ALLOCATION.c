@@ -1,10 +1,11 @@
 #include<stdio.h>
-int allocateadd(int avai_add[],int s,int n){
+//Showing which reference is best to fit.
+int allocateadd(int references[],int s,int n){
     int index = -1;
     for(int i=0;i<n;i++){
-        if(avai_add[i]>s && avai_add[i]!=0){
-            index = avai_add[i];
-            avai_add[i] = 0;
+        if(references[i]>s && references[i]!=0){
+            index = references[i];
+            references[i] = 0;
             return index;
         }
     }
@@ -13,18 +14,18 @@ int allocateadd(int avai_add[],int s,int n){
 
 int main(){
     int n;
-    printf("Enter number of memory block or chunks");
+    printf("Enter number of memory block or chunks");  //How many reference are there
     scanf("%d",&n);
-    int avai_add[n];
-    printf("Enter the chunks ");
+    int references[n];
+    printf("Enter the chunks "); //Size of each reference
     for(int i=0;i<n;i++){
-        scanf("%d",&avai_add[i]);
+        scanf("%d",&references[i]);
     }
-    printf("Enter the number of process request  ");
+    printf("Enter the number of process request  "); // How many process are requesting for memory
     int a;
     scanf("%d",&a);
     int allo[a];
-    printf("Enter all process request ");
+    printf("Enter all process request "); //How much memory size is requested by each process 
     for(int i=0;i<a;i++){
         scanf("%d",&allo[i]);
     }
@@ -32,21 +33,20 @@ int main(){
     // Best Fit
     for(int i=0;i<n;i++){
         for(int j=0;j<n-1;j++){
-            if(avai_add[j]>avai_add[j+1]){
-                int a = avai_add[j];
-                avai_add[j] = avai_add[j+1];
-                avai_add[j+1] = a;
+            if(references[j]>references[j+1]){
+                int a = references[j];
+                references[j] = references[j+1];
+                references[j+1] = a;
             }
         }
     }
     for(int i=0;i<a;i++){
         int s = allo[i];
-        int p = allocateadd(avai_add,s,n);
+        int p = allocateadd(references,s,n);
         if(p==-1){
-            printf("Memory Chunk is not available for %d\n",s);
+            printf("Memory Chunk is not available for %d\n",s); //Whether for each process request is available or not
         }else{
             printf("Memory Chunk of %d is allocated to %d\n",p,s);
         }
     }
-    printf("Thanks");
 }
