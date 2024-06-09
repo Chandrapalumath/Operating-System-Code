@@ -12,12 +12,12 @@ int allocateadd(int avai_add[],int s,int n){
     return index;
 }
 int main(){
-    cppcppcppcppcppcpp
+    //cppcppcppcppcppcpp
     int n;
-    printf("Enter number of memory block or chunks");
+    //printf("Enter number of memory block or chunks");
     scanf("%d",&n);
     int avai_add[n];
-    printf("Enter the chunks ");
+    //printf("Enter the chunks ");
     for(int i=0;i<n;i++){
         scanf("%d",&avai_add[i]);
     }
