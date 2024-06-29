@@ -1,0 +1,73 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+int runprocess(int ticket[],int a,int n){
+        int index=0;
+        int k=0;
+        for(int i=0;i<n;i++){
+                if(a>ticket[i] && ticket[i]>ticket[index]){
+                index=i;
+                }
+        }
+        return index;
+}
+int main(){
+        srand(0);
+        int n;
+        printf("Enter number of process ");
+        scanf("%d",&n);
+        int ticket[n];
+        int max=0;
+        for(int i=0;i<n;i++){
+                printf("Enter ticket of process %d ",i);
+                scanf("%d",&ticket[i]);
+                if(ticket[i]>max){
+                max=ticket[i];}
+        }
+        int temp[n];
+        for(int i=0;i<n;i++){
+                temp[i]=ticket[i];
+        }
+        for(int i=0;i<n;i++){
+         for(int j=0;j<n-1;j++){
+                if(ticket[i]<ticket[j]){
+                        int t=ticket[j];
+                        ticket[j]=ticket[i];
+                        ticket[i]=t;
+                }
+         }
+        }
+        int randomnu;
+        printf("How much random number you want to generate ");
+        scanf("%d",&randomnu);
+        int random[randomnu];
+        for(int i=0;i<randomnu;i++){
+                random[i]=rand()%max;
+        }
+        for(int i=0;i<n;i++){
+                printf("%d ",random[i]);
+        }
+        printf("\n");
+        int process[n];
+        for(int i=0;i<n;i++){
+                process[i]=0;
+        }
+        for(int i=0;i<randomnu;i++){
+                int index = runprocess(ticket,random[i],n);
+                int r = ticket[index];
+                for(int j=0;j<n;j++){
+                        if(r==temp[j]){
+                        index=j;
+
+                        }
+                }
+                printf("P%d ",index);
+                process[index]++;
+        }
+        printf("/n");
+        for(int i=0;i<n;i++){
+                int a = process[i];
+                printf("CPU allocation for process P%d is %f% \n",i,((a * 1.0 )/randomnu)*100);
+        }
+        return 0;
+}
